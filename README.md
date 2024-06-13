@@ -47,7 +47,7 @@ pnpm run dev
 
 ## Build + Deploy
 
-You'll need to deploy the Nuxt app to a hosting platform. I often use Azure SWA, so there is an example workflow for that in []`.github/workflows/example-swa-workflow.yml`](/.github/workflows/example-swa-workflow.yml).
+You'll need to deploy the Nuxt app to a hosting platform. I often use Azure SWA, so there is an example workflow for that in [`.github/workflows/example-swa-workflow.yml`](/.github/workflows/example-swa-workflow.yml).
 
 Once that is done, edit the `shopify.app.prod.toml` file to set the `application_url` to your deployed site, and update the `redirect_urls` array to add your site with the pathname of `/auth/callback`. Next, use the Shopify CLI to deploy the production config:
 
