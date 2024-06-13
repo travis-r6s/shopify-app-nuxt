@@ -1,0 +1,26 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = ""
+name = ""
+handle = ""
+application_url = ""
+embedded = true
+
+[build]
+include_config_on_deploy = true
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[access.admin]
+direct_api_mode = "online"
+
+[auth]
+redirect_urls = [ "" ]
+
+[webhooks]
+api_version = "2024-04"
+
+[pos]
+embedded = false

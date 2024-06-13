@@ -1,0 +1,29 @@
+{
+  "name": "shopify-app-nuxt",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build:app": "pnpm run -C app build",
+    "build": "pnpm run codegen && shopify app build",
+    "dev:app": "pnpm run -C app dev",
+    "dev:codegen": "pnpm run codegen:graphql --watch",
+    "dev": "shopify app dev",
+    "generate": "shopify app generate",
+    "config:link": "shopify app config link",
+    "config:use": "shopify app config use",
+    "deploy": "shopify app deploy",
+    "env": "shopify app env",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/eslint --fix . ",
+    "shopify": "shopify",
+    "codegen": "pnpm run \"/^codegen:.*/\"",
+    "codegen:graphql": "graphql-codegen"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.21.1",
+    "@shopify/api-codegen-preset": "^1.0.0",
+    "@types/node": "^20.14.2",
+    "eslint": "^9.4.0",
+    "openapi-typescript": "^6.7.6",
+    "typescript": "^5.4.5"
+  }
+}

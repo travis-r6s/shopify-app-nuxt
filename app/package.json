@@ -1,0 +1,32 @@
+{
+  "name": "nuxt-app",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.0.0",
+    "@ownego/polaris-vue": "^2.1.0",
+    "@sentry/node": "^8.9.2",
+    "@sentry/profiling-node": "^8.9.2",
+    "@sentry/vue": "^8.9.2",
+    "@shopify/polaris-icons": "^9.1.1",
+    "@shopify/shopify-api": "^11.0.0",
+    "consola": "^3.2.3",
+    "cosmos-orm": "^0.3.1",
+    "nuxt": "^3.12.1",
+    "vue": "^3.4.27",
+    "vue-router": "^4.3.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@shopify/app-bridge-types": "^0.0.13",
+    "@vueuse/core": "^10.11.0",
+    "@vueuse/nuxt": "^10.11.0",
+    "vite-svg-loader": "^5.1.0"
+  }
+}

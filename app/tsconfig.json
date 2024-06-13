@@ -1,0 +1,10 @@
+{
+  // https://nuxt.com/docs/guide/concepts/typescript
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": [
+      "@ownego/polaris-vue/dist/volar",
+      "@shopify/app-bridge-types"
+    ]
+  }
+}

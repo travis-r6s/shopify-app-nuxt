@@ -1,0 +1,88 @@
+name: Azure Static Web Apps CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        id: checkout
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Node
+        uses: actions/setup-node@v4
+        id: node-install
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        id: dependencies-install
+        run: pnpm install
+
+      - name: Run codegen
+        id: codegen
+        run: pnpm run codegen
+
+      - name: Build app
+        id: build
+        run: pnpm build:app
+        env:
+          NITRO_PRESET: azure
+          NUXT_PUBLIC_SENTRY_ENVIRONMENT: ${{ secrets.NUXT_PUBLIC_SENTRY_ENVIRONMENT }}
+          NUXT_PUBLIC_SENTRY_DSN: ${{ secrets.NUXT_PUBLIC_SENTRY_DSN }}
+          SHOPIFY_API_KEY: ${{ secrets.SHOPIFY_API_KEY }}
+
+      - name: Copy Config
+        id: copy-config
+        run: cp app/staticwebapp.config.json app/.output/public
+
+      - name: Build And Deploy
+        id: deploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: upload
+
+          # Building ourselves, so skip builds here
+          skip_api_build: true
+          skip_app_build: true
+
+          # The location of the built API code
+          api_location: app/.output/server
+
+          # The location of the built app code
+          app_location: app/.output/public
+
+          # The location for the apps public content - as we have already built this, it is the same as the app_location
+          output_location: ''
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: close-pull-request
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: close

@@ -1,0 +1,10 @@
+name = "nuxt"
+roles = [
+  "frontend",
+  "backend"
+]
+webhooks_path = "/webhooks"
+port = 3000
+
+[commands]
+dev = "pnpm run /^dev:.*/"

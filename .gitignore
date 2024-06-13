@@ -1,0 +1,17 @@
+node_modules
+
+/.cache
+/build
+/app/build
+/public/build/
+/public/_dev
+/app/public/build
+/prisma/dev.sqlite
+/prisma/dev.sqlite-journal
+database.sqlite
+
+.env*
+!.env.example
+
+# Ignore, and regen whenever we need to
+shopify.app.dev.toml
