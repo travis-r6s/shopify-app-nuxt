@@ -20,7 +20,7 @@ Sessions need to be saved in a database. As I deploy to [Azure SWA](https://azur
 
 ```sh
 # Clone repo
-npx degit github:travis-r6s/shopify-app-nuxt
+npx degit github:travis-r6s/shopify-app-nuxt <directory>
 
 # Install dependencies
 pnpm install
