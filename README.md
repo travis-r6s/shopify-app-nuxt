@@ -22,6 +22,7 @@ Sessions need to be saved in a database. As I deploy to [Azure SWA](https://azur
 # Clone repo
 npx degit github:travis-r6s/shopify-app-nuxt <directory>
 
+
 # Install dependencies
 pnpm install
 
@@ -35,21 +36,30 @@ code app/.env
 pnpm config:link
 pnpm config:use <config name used in previous step>
 
-# Deploy initial version to Shopify
+
+# Deploy initial version to Shopify to configure scopes
 pnpm deploy
 
 
 # Run development command
 pnpm run dev
-
-# Make hay!
 ```
+[Make hay!](https://dictionary.cambridge.org/dictionary/english/make-hay-while-the-sun-shines)
 
 ## Build + Deploy
 
 You'll need to deploy the Nuxt app to a hosting platform. I often use Azure SWA, so there is an example workflow for that in [`.github/workflows/example-swa-workflow.yml`](/.github/workflows/example-swa-workflow.yml).
 
-Once that is done, edit the `shopify.app.prod.toml` file to set the `application_url` to your deployed site, and update the `redirect_urls` array to add your site with the pathname of `/auth/callback`. Next, use the Shopify CLI to deploy the production config:
+Once that is done, edit the `shopify.app.prod.toml` file to set the `application_url` to your deployed site, and update the `redirect_urls` array to add the site hostname with a pathname of `/auth/callback`. 
+
+```toml
+application_url = "https://<deployed app hostname>"
+
+[auth]
+redirect_urls = [ "https://<deployed app hostname>/auth/callback" ]
+```
+
+Next, use the Shopify CLI to deploy the production config:
 
 ```sh
 # Run the deploy command, specifying the production config file
@@ -65,3 +75,8 @@ Now you can visit the app in the Partners dashboard, and either install it to a 
 ---
 
 Have fun!
+
+
+## TODO
+
+- [ ] Check if we can replace some of the string template responses (i.e. [here](https://github.com/travis-r6s/shopify-app-nuxt/blob/e63be879b5b53ba44e71ae4e52bd3ca195159127/app/server/utils/auth.ts#L134)) with server [templates](https://nuxt.com/docs/api/kit/templates)/[assets](https://nitro.build/guide/assets#custom-server-assets) instead.
