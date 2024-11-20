@@ -13,7 +13,7 @@ I frequently use [Azure SWA](https://azure.microsoft.com/en-us/products/app-serv
 As a workaround till this is fixed, we use a custom fetch instance ([`/app/plugins/shopify.ts`](/app/plugins/shopify.ts)) to add a different header name with the value of an ID token, and check that header on our server instead of the `Authorization` header.
 
 ### Session Storage
-Sessions need to be saved in a database. As I deploy to [Azure SWA](https://azure.microsoft.com/en-us/products/app-service/static), I also use [Azure Cosmos](https://azure.microsoft.com/en-us/products/cosmos-db) as a DB, and so the `fetchExistingSession` & `authenticateSession` (see [`/app/server/utils/auth.ts`](/app/server/utils/auth.ts)) functions use a Cosmos client to fetch/save sessions. This can be replaced by any other client though - for example, you could instead use [Nitro KV Storage](https://nitro.unjs.io/guide/storage) for this.
+Sessions need to be saved in a database. As I deploy to [Azure SWA](https://azure.microsoft.com/en-us/products/app-service/static), I also use [Azure Cosmos](https://azure.microsoft.com/en-us/products/cosmos-db) as a DB, and so the `fetchExistingSession` & `authenticateSession` functions (see [`/app/server/utils/auth.ts`](/app/server/utils/auth.ts)) use a Cosmos client to fetch + save sessions. This can be replaced by any other client though - for example, you could instead use [Nitro KV Storage](https://nitro.unjs.io/guide/storage) for this.
 
 
 ## Get Started
