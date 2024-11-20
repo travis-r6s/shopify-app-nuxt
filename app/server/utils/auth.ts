@@ -333,10 +333,10 @@ export async function fetchExistingSession(sessionId: string): Promise<Session |
 }
 
 /**
- * Runs a literal ton of checks, to handle the various cases where we may/may not be embedded,
+ * Runs a literal ton of checks to handle the various cases where we may or may not be embedded,
  * may have missing tokens, may not be installed, etc., and redirects to the relevant pages as needed.
  *
- * If everything is successful, it returns a `Session` object that we can use for API requests etc.
+ * If everything is successful, it returns a `Session` object that we can use for API requests.
  */
 export async function assertSession(event: H3Event): Promise<Session> {
   event.context.$sentry?.addBreadcrumb({ message: 'Running assertSession function' })
